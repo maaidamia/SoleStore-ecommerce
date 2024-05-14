@@ -7,8 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ShoozApplication {
 
 	public static void main(String[] args) {
-		//mnnn
-
 		SpringApplication.run(ShoozApplication.class, args);
 	}
 
