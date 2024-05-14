@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ShoozApplication {
 
 	public static void main(String[] args) {
-		//mnnn
+		//bark
 
 		SpringApplication.run(ShoozApplication.class, args);
 	}
