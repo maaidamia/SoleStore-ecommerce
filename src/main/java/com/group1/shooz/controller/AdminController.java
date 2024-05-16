@@ -1,8 +1,9 @@
 package com.group1.shooz.controller;
 
-import com.group1.shooz.model.ManageProduct;
 import com.group1.shooz.service.AdminService;
 import com.group1.shooz.service.ProductService;
+import com.group1.shooz.service.UserService;
+import com.group1.shooz.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,10 @@ public class AdminController {
     private AdminService adminService;
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
     //homepage aka index page
     @GetMapping("/")
@@ -35,13 +40,15 @@ public class AdminController {
 
 
     @GetMapping("/manage-order")
-    public String manageOrder(){
+    public String manageOrder(Model model){
+        model.addAttribute("listOrder", orderService.getAllOrder());
         return "admin/manage-order";
     }
 
 
     @GetMapping("/manage-user")
-    public String manageUser(){
+    public String manageUser(Model model){
+        model.addAttribute("listUser", userService.getAllUser());
         return "admin/manage-user";
     }
 
