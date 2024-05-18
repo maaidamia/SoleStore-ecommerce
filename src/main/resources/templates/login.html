@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form h2 {
+            color: #A91D3A;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        .form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        .form input {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form button {
+            background-color: #A91D3A;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form button:hover {
+            background-color: #C73659;
+        }
+        .message {
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Success Message -->
+    <div th:if="${param.success}" class="message success" id="success-message">
+        Registration successful! Please login to continue.
+    </div>
+
+    <!-- Error Message -->
+    <div th:if="${error}" class="message error" id="error-message">
+        Invalid username or password.
+    </div>
+
+    <form class="form" th:action="@{/login}" method="post">
+        <h2>Login to SoleStore</h2>
+        <label for="user_email">Email</label>
+        <input type="email" id="user_email" name="user_email" required>
+        <label for="user_password">Password</label>
+        <input type="password" id="user_password" name="user_password" required>
+        <button type="submit">Login</button>
+    </form>
+    <span>Register here: <a th:href="@{/register}">Register</a></span>
+</div>
+
+</body>
+</html>
