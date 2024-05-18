@@ -12,59 +12,9 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 <body class="sb-nav-fixed">
-<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" th:href="@{/admin/index}">Shooz Management System</a>
-    <!-- Sidebar Toggle-->
-    <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
-    <!-- space in the middle-->
-    <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-    </div>
-    <!-- Navbar-->
-    <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#!">Logout</a></li>
-            </ul>
-        </li>
-    </ul>
-</nav>
+<div th:insert="admin/top-nav :: topNav"></div>
 <div id="layoutSidenav">
-    <div id="layoutSidenav_nav">
-        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-            <div class="sb-sidenav-menu">
-                <div class="nav">
-                    <div class="sb-sidenav-menu-heading">Go to</div>
-                    <a class="nav-link" th:href="@{/admin/index}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                        Dashboard
-                    </a>
-                    <div class="sb-sidenav-menu-heading">Manage</div>
-                    <a class="nav-link" th:href="@{/admin/manage-product}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Products
-                    </a>
-                    <a class="nav-link" th:href="@{/admin/manage-order}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Orders
-                    </a>
-                    <a class="nav-link" th:href="@{/admin/manage-user}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Users
-                    </a>
-                    <a class="nav-link" th:href="@{/admin/manage-admin}">
-                        <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                        Admins
-                    </a>
-                </div>
-            </div>
-            <div class="sb-sidenav-footer">
-                <div class="small">Logged in as:</div>
-                Admin
-            </div>
-        </nav>
-    </div>
+    <div th:insert="admin/side-nav :: sideNav"></div>
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
@@ -79,38 +29,47 @@
                         List of Product
                     </div>
                     <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h4></h4>
+                            <a href="#" class="btn btn-dark btn-icon-split">Add New</a>
+                        </div>
                         <table id="datatablesSimple">
                             <thead>
                             <tr>
+                                <th>Image</th>
                                 <th>Product Name</th>
                                 <th>Brand Name</th>
-                                <th>Size</th>
+<!--                                <th>Size</th>-->
                                 <th>Price</th>
-                                <th>Image</th>
-                                <th>Quantity</th>
-                                <th>Description</th>
+                                <th>Stock Quantity</th>
+<!--                                <th>Description</th>-->
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tfoot>
                             <tr>
+                                <th>Image</th>
                                 <th>Product Name</th>
                                 <th>Brand Name</th>
-                                <th>Size</th>
+<!--                                <th>Size</th>-->
                                 <th>Price</th>
-                                <th>Image</th>
-                                <th>Quantity</th>
-                                <th>Description</th>
+                                <th>Stock Quantity</th>
+<!--                                <th>Description</th>-->
+                                <th>Action</th>
                             </tr>
                             </tfoot>
                             <tbody>
                             <tr th:each="product: ${listProduct}">
+                                <td><img th:src="@{${product.productImage}}" alt="Product Image"  style="width: 100px; height: auto;"></td>
                                 <td th:text="${product.productName.productName}"></td>
                                 <td th:text="${product.brand.brandName}"></td>
-                                <td th:text="${product.size.productSize}"></td>
+<!--                                <td th:text="${product.size.productSize}"></td>-->
                                 <td th:text="${product.productPrice}"></td>
-                                <td><img th:src="@{${product.productImage}}" alt="Product Image"  style="width: 100px; height: auto;"></td>
+<!--                                need to use COUNT and GROUP BY, to total up all the quantity of all sizes.-->
                                 <td th:text="${product.productQuantity}"></td>
-                                <td th:text="${product.productDesc}"></td>
+<!--                                <td th:text="${product.productDesc}"></td>-->
+<!--                                next page have CRUD operation for that selected product-->
+                                <td><a href="#" class="btn btn-dark btn-icon-split">View Details</a></td>
                             </tr>
                             </tbody>
                         </table>
