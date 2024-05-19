@@ -4,34 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            flex-direction: column;
         }
         .container {
             background-color: white;
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 6px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
             text-align: center;
+            margin-top: 60px; /* Adjust for fixed header */
         }
         .form {
             display: flex;
             flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
         }
         .form h2 {
             color: #A91D3A;
             margin-bottom: 20px;
             font-size: 24px;
             text-align: center;
+            width: 100%;
         }
         .form label {
             margin-bottom: 5px;
@@ -40,10 +67,11 @@
         }
         .form input {
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 6px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
+            width: 100%;
         }
         .form button {
             background-color: #A91D3A;
@@ -54,6 +82,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            align-self: stretch; /* Stretch button to full width */
         }
         .form button:hover {
             background-color: #C73659;
@@ -79,53 +108,76 @@
             color: #0c5460;
             border: 1px solid #bee5eb;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        .header a {
+            text-decoration: none;
+            color: #A91D3A;
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+<!-- Header -->
+<div class="header">
+    <a th:href="@{/}">SoleStore</a>
+</div>
+
 <div class="container">
     <!-- Success Message -->
-    <div th:if="${success}" class="message success" id="success-message" style="display: none;">
-        Registration successful! Welcome to SoleStore.
+    <div th:if="${param.success}" class="message success" id="success-message">
+        Registration successful! Please login to continue.
     </div>
 
     <!-- Error Message -->
-    <div th:if="${error}" class="message error" id="error-message" style="display: none;">
-        Registration failed! Please try again.
+    <div th:if="${param.error}" class="message error" id="error-message">
+        Invalid username or password.
     </div>
-    <form th:action="@{/register}" th:object="${userDto}" method="post" class="form">
-        <h2>User Registration</h2>
-        <label for="userName">User Name:</label>
-        <input type="text" id="userName" th:field="*{userName}" /><br/>
+    <div th:if="${param.logout}" class="message info" id="logout-message">
+        Logout Successfully
+    </div>
 
-        <label for="userEmail">Email:</label>
-        <input type="email" id="userEmail" th:field="*{userEmail}" /><br/>
+    <form class="form" th:action="@{/register/save}" th:object="${user}" method="post">
+        <h2>Register for SoleStore</h2>
+        <label for="firstName">First Name</label>
+        <input type="text" id="firstName" name="firstName" th:field="*{firstName}" placeholder="Enter first name" required>
+        <p th:errors="*{firstName}" class="text-danger"></p>
 
-        <label for="userPassword">Password:</label>
-        <input type="password" id="userPassword" th:field="*{userPassword}" /><br/>
+        <label for="lastName">Last Name</label>
+        <input type="text" id="lastName" name="lastName" th:field="*{lastName}" placeholder="Enter last name" required>
+        <p th:errors="*{lastName}" class="text-danger"></p>
 
-        <label for="userPhone">Phone:</label>
-        <input type="text" id="userPhone" th:field="*{userPhone}" /><br/>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" th:field="*{email}" placeholder="Enter email address" required>
+        <p th:errors="*{email}" class="text-danger"></p>
 
-        <label for="userAddress">Address:</label>
-        <input type="text" id="userAddress" th:field="*{userAddress}" /><br/>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" th:field="*{password}" placeholder="Enter password" required>
+        <p th:errors="*{password}" class="text-danger"></p>
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" th:field="*{address}" placeholder="Enter address" required>
+        <p th:errors="*{address}" class="text-danger"></p>
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" th:field="*{phone}" placeholder="Enter phone number" required>
+        <p th:errors="*{phone}" class="text-danger"></p>
 
         <button type="submit">Register</button>
-        <span>Already Registered? <a th:href="@{/login}">Login</a></span>
     </form>
+    <span>Already registered? <a th:href="@{/login}">Login here</a></span>
 </div>
 
-<script>
-    // Example script to display messages based on conditions
-    const urlParams = new URLSearchParams(window.location.search);
-    const successMessage = urlParams.get('success');
-    const errorMessage = urlParams.get('error');
-
-    if (successMessage) {
-        document.getElementById('success-message').style.display = 'block';
-    }
-    if (errorMessage) {
-        document.getElementById('error-message').style.display = 'block';
-    }
-</script>
 </body>
 </html>

@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="assets/css/main.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f4f4f4;
             display: flex;
             justify-content: center;
@@ -22,16 +45,19 @@
             width: 100%;
             max-width: 400px;
             text-align: center;
+            margin-top: 60px; /* Adjust for fixed header */
         }
         .form {
             display: flex;
             flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
         }
         .form h2 {
             color: #A91D3A;
             margin-bottom: 20px;
             font-size: 24px;
             text-align: center;
+            width: 100%;
         }
         .form label {
             margin-bottom: 5px;
@@ -40,10 +66,11 @@
         }
         .form input {
             margin-bottom: 15px;
-            padding: 10px;
+            padding: 6px;
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
+            width: 100%;
         }
         .form button {
             background-color: #A91D3A;
@@ -54,6 +81,7 @@
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            align-self: stretch; /* Stretch button to full width */
         }
         .form button:hover {
             background-color: #C73659;
@@ -79,9 +107,32 @@
             color: #0c5460;
             border: 1px solid #bee5eb;
         }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        .header a {
+            text-decoration: none;
+            color: #A91D3A;
+            font-size: 24px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
+<!-- Header -->
+<div class="header">
+    <a th:href="@{/}">SoleStore</a>
+</div>
+
 <div class="container">
     <!-- Success Message -->
     <div th:if="${param.success}" class="message success" id="success-message">
@@ -89,20 +140,22 @@
     </div>
 
     <!-- Error Message -->
-    <div th:if="${error}" class="message error" id="error-message">
+    <div th:if="${param.error}" class="message error" id="error-message">
         Invalid username or password.
+    </div>
+    <div th:if="${param.logout}" class="message info">
+        You have been logged out.
     </div>
 
     <form class="form" th:action="@{/login}" method="post">
         <h2>Login to SoleStore</h2>
-        <label for="user_email">Email</label>
-        <input type="email" id="user_email" name="user_email" required>
-        <label for="user_password">Password</label>
-        <input type="password" id="user_password" name="user_password" required>
+        <label for="username">Email</label>
+        <input type="text" id="username" name="username" placeholder="Email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
         <button type="submit">Login</button>
     </form>
-    <span>Register here: <a th:href="@{/register}">Register</a></span>
+    <span>Not registered? <a th:href="@{/register}">Register/SignUp Here</a></span>
 </div>
-
 </body>
 </html>
