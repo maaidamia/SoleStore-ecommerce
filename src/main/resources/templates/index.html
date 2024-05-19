@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Users</title>
+</head>
+<body>
+
+<!-- New container div starts -->
+<!-- DISPLAY ALL USERS -->
+<h1>Users List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Admin ID</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.user_id}">ID</td>
+        <td th:text="${user.user_email}">Email</td>
+        <td th:text="${user.user_name}">Name</td>
+        <td th:text="${user.user_phone}">Phone</td>
+        <td th:text="${user.user_address}">Address</td>
+        <td th:text="${user.fk_admin_id.admin_id}">Admin ID</td>
+        <td><a th:href="@{/user/{id}(id=${user.user_id})}">View</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+</body>
+</html>

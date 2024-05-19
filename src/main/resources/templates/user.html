@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Details</title>
+</head>
+<body>
+
+<!-- DISPLAY USER 1 -->
+<h1>User Details</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${user.user_id}">ID</td>
+        <td th:text="${user.user_email}">Email</td>
+        <td th:text="${user.user_name}">Name</td>
+        <td th:text="${user.user_phone}">Phone</td>
+        <td th:text="${user.user_address}">Address</td>
+    </tr>
+    </tbody>
+</table>
+<!-- END DISPLAY USER 1 -->
+
+<!-- DISPLAY ORDER 1 -->
+<h1>Order Details</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User Name</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${orders.orders_id}">ID</td>
+        <td th:text="${user.user_name}">User Name</td>
+        <td th:text="${orders.orders_totalamount}">Total Amount</td>
+        <td th:text="${orders.orders_status}">Status</td>
+    </tr>
+    </tbody>
+</table>
+<!-- END DISPLAY ORDER 1 -->
+
+
+
+</body>
+</html>

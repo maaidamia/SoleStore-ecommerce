@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+</head>
+<body>
+<h1>Order Summary</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Order ID</th>
+        <th>Total Amount</th>
+        <th>Status</th>
+        <th>Date</th>
+        <th>Items</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through each order -->
+    <th:block th:each="order : ${orders}">
+        <tr>
+<!--            <td th:text="${order.orders_id}"></td>-->
+            <td>
+                <!-- Create a link to the order details page -->
+                <a th:href="@{'/orderDetails/' + ${order.orders_id}}">
+                    <span th:text="${order.orders_id}"></span>
+                </a>
+            </td>
+            <td th:text="${order.orders_totalamount}"></td>
+            <td th:text="${order.orders_status}"></td>
+            <td th:text="${order.orders_datetime}"></td>
+            <td>
+                <!-- Loop through order items associated with this order -->
+                <ul>
+                    <th:block th:each="item : ${order.orderItems}">
+                        <li>
+                            <span th:text="${item.product.productNameId.product_name}"></span>
+                            <span th:text="${item.ordersitem_quantity}"></span>
+                        </li>
+                    </th:block>
+                </ul>
+            </td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</body>
+</html>

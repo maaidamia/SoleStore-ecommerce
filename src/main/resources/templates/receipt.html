@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Summary</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style type="text/css">
+        body {
+            margin-top: 20px;
+            background: #eee;
+        }
+        .invoice {
+            padding: 30px;
+        }
+        .invoice h2 {
+            margin-top: 0px;
+            line-height: 0.8em;
+        }
+        .invoice .small {
+            font-weight: 300;
+        }
+        .invoice hr {
+            margin-top: 10px;
+            border-color: #ddd;
+        }
+        .invoice .table tr.line {
+            border-bottom: 1px solid #ccc;
+        }
+        .invoice .table td {
+            border: none;
+        }
+        .invoice .identity {
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+        .invoice .identity strong {
+            font-weight: 600;
+        }
+        .grid {
+            position: relative;
+            width: 100%;
+            background: #fff;
+            color: #666666;
+            border-radius: 2px;
+            margin-bottom: 25px;
+            box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="grid invoice">
+                <div class="grid-body">
+                    <div class="invoice-title">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img src="http://vergo-kertas.herokuapp.com/assets/img/logo.png" alt height="35">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2>invoice<br>
+                                    <span class="small">order #1082</span>
+                                </h2>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <address>
+                                <strong>Shipped To:</strong><br>
+                                Name: <span th:text="${user.user_name}">Name</span><br>
+                                Phone: <span th:text="${user.user_phone}">Phone</span><br>
+                                Address: <span th:text="${user.user_address}">Address</span><br>
+                            </address>
+                        </div>
+                        <div class="col-xs-6 text-right">
+                            <address>
+                                <strong>Order Date:</strong><br>
+                                13 / 04 / 2024
+                            </address>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>ORDER SUMMARY</h3>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th style="width: 70%;">Product Name</th>
+                                    <th style="width: 15%; text-align: right;">Product Quantity</th>
+                                    <th style="width: 15%; text-align: right;">Product Price (RM)</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="order : ${orders}">
+                                    <td colspan="3">
+                                        <table class="table">
+                                            <tbody>
+                                            <tr th:each="item : ${order.orderItems}">
+                                                <td th:text="${item.product.productNameId.product_name}" style="width: 70%;"></td>
+                                                <td th:text="${item.ordersitem_quantity}" style="width: 15%; text-align: right;"></td>
+                                                <td th:text="${item.product.product_price}" style="width: 15%; text-align: right;"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                <tfoot>
+                                <tr>
+                                    <td colspan="2" style="text-align: right;">Total:   RM</td>
+                                    <td id="total" style="text-align: right;"></td> <!-- Add an empty element for displaying the total -->
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-right identity">
+                            <p>Thank You<br>by <strong>Sole Store</strong></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <a href="index" class="btn btn-primary">Back to Home</a>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <a href="#" onclick="window.print()">
+                                    <i class="fas fa-print fa-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Function to calculate total
+        function calculateTotal() {
+            var total = 0;
+            // Select all product price elements
+            var productPrices = document.querySelectorAll('.table tbody tr td:last-child');
+            // Loop through each product price and add it to total
+            productPrices.forEach(function(priceElement) {
+                var price = parseFloat(priceElement.textContent);
+                console.log("Price:", price);
+                if (!isNaN(price)) {
+                    total += price;
+                }
+            });
+            // Update the total in the table footer
+            document.getElementById('total').textContent = total.toFixed(2);
+        }
+
+        // Call the calculateTotal function when the DOM content is loaded
+        calculateTotal();
+    });
+</script>
+</body>
+</html>
