@@ -1,28 +1,30 @@
 package com.becoder.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class UserDto {
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDto
+{
+    private Integer id;
+    @NotEmpty
+    private String firstName;
+    @NotEmpty
+    private String lastName;
+    @NotEmpty(message = "Email should not be empty")
+    @Email
+    private String email;
+    @NotEmpty(message = "Password should not be empty")
+    private String password;
 
-    private String userEmail;
-    private String userPassword;
-    private String userName;
-    private String userPhone;
-    private String userAddress;
-
-
-    public UserDto() {
-    }
-
-    public UserDto(String userEmail, String userPassword, String userName, String userPhone, String userAddress) {
-        this.userEmail = userEmail;
-        this.userPassword = userPassword;
-        this.userName = userName;
-        this.userPhone = userPhone;
-        this.userAddress = userAddress;
-    }
+    private String address;
+    private String phone;
 
 }

@@ -1,10 +1,14 @@
 package com.becoder.service;
 
-import com.becoder.dto.UserDto;
-import com.becoder.model.User;
+import com.example.dto.UserDto;
+import com.example.entity.User;
+
+import java.util.List;
 
 public interface UserService {
+    void saveUser(UserDto userDto);
 
-    User findByUserEmail(String userEmail);
-    User save(UserDto userDto);
+    User findByEmail(String email);
+
+    List<UserDto> findAllUsers();
 }
