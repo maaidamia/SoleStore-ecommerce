@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>SoleStore Malaysia</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    .black-text {
+        color: black;
+    }
+
+    .margin-right {
+        margin-right: 20px;
+    }
+
+    .login-link {
+        color: black;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 550;
+    }
+
+    .cart-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 0%;
+        object-fit: cover;
+        transition: transform 0.5s, box-shadow 0.3s;
+    }
+
+    .cart-icon:hover {
+        transform: scale(1.1);
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .card {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .card .btn {
+        align-self: flex-end;
+    }
+
+    .card-body h3 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+    }
+
+    .card h3 {
+        font-family: 'Poppins', sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        color: grey;
+        margin-top: 10px;
+    }
+
+    .buy-now-btn {
+        background-color: black;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .buy-now-btn:hover {
+        background-color: #0d6efd;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+      <h1>SoleStore<span>.</span></h1>
+    </a>
+
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li><a href="#hero">Home</a></li>
+      </ul>
+    </nav><!-- .navbar -->
+
+    <div class="d-flex align-items-center">
+      <a href="login" class="login-link margin-right">Login</a>
+      <a href="#cart"><img src="assets/img/market.png" alt="Cart" class="cart-icon"></a>
+    </div>
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+  </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="hero d-flex align-items-center section-bg">
+  <div class="container">
+    <div class="row justify-content-between gy-5">
+      <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+        <h2 data-aos="fade-up">Elevate Your Game With<br>Air Jordan 1</h2>
+        <p data-aos="fade-up" data-aos-delay="100">Walking on air with my Jordan 1s, feeling unstoppable. It's more than just a pair of shoes, it's a symbol.</p>
+        <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+          <a href="#order-now" class="btn-book-a-table">Order Now</a>
+          <a href="https://youtu.be/BQVWa6rUyfY?si=J9DRQvDkrB2oJXVM" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+        </div>
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+        <img src="assets/img/jordan1.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+      </div>
+    </div>
+  </div>
+</section><!-- End Hero Section -->
+
+<main id="main">
+
+  <!-- ======= Menu Section ======= -->
+  <section id="menu" class="menu">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-header">
+        <h2>SoleStore.</h2>
+        <p>Our <span class="bold">Products</span></p>
+      </div>
+
+      <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+
+        <li class="nav-item">
+          <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#brand-adidas">
+            <h4>All</h4>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Start Display all products -->
+  <div class="container">
+    <div class="row">
+      <!-- Iterate over products and generate cards -->
+      <div class="col-md-4" th:each="product : ${products}">
+        <div class="card mb-4">
+<!--          <a th:href="@{/product_details/{id}(id=${product.fk_productname_id.productname_id})}" class="product-link">-->
+            <img th:src="@{${product.product_image}}" class="card-img-top" alt="Product Image">
+          </a>
+          <div class="card-body">
+            <!-- Update to display product name using the new foreign key -->
+            <h5 class="card-title" th:text="${product.fk_productname_id.product_name}" style="font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600;">Product Name</h5>
+            <p class="card-text" th:text="'RM ' + ${product.product_price}" style="font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: regular;">Price</p>
+<!--            <p class="card-text" th:text="'In Stock: ' + ${product.product_quantity}" style="font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: regular;">Price</p>-->
+            <a class="btn btn-primary" style="background-color: black; ">Buy Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+
+  <div class="container">
+    <div class="row gy-3">
+      <div class="col-lg-3 col-md-6 d-flex">
+        <i class="bi bi-geo-alt icon"></i>
+        <div>
+          <h4>Address</h4>
+          <p>
+            Laman Norsham<br>
+            Sungai Buloh, Selangor 47000 - MY<br>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links d-flex">
+        <i class="bi bi-telephone icon"></i>
+        <div>
+          <h4>Reservations</h4>
+          <p>
+            <strong>Phone:</strong> +1 5589 55488 55<br>
+            <strong>Email:</strong> solestore@gmail.com<br>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links d-flex">
+        <i class="bi bi-clock icon"></i>
+        <div>
+          <h4>Opening Hours</h4>
+          <p>
+            <strong>Mon-Sat: 11AM</strong> - 23PM<br>
+            Sunday: Closed
+          </p>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 footer-links">
+        <h4>Follow Us</h4>
+        <div class="social-links d-flex">
+          <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+          <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>SoleStore.</span></strong> All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </div>
+
+</footer><!-- End Footer -->
+
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<div id="preloader"></div>
+
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<!--<script>-->
+<!--  document.addEventListener('DOMContentLoaded', function() {-->
+<!--      var productLinks = document.querySelectorAll('.product-link');-->
+<!--      productLinks.forEach(function(link) {-->
+<!--          link.addEventListener('click', function(event) {-->
+<!--              // Prevent default link behavior-->
+<!--              event.preventDefault();-->
+
+<!--              // Extract product ID from the href attribute-->
+<!--              var productID = link.getAttribute('href').split('=')[1];-->
+
+<!--              // Redirect to product_details.html with the product ID-->
+<!--              window.location.href = 'product_details.html?product_id=' + productID;-->
+<!--          });-->
+<!--      });-->
+<!--  });-->
+<!--</script>-->
+
+<!-- Template Main JS File -->
+<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

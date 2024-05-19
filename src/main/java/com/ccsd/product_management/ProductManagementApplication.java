@@ -1,15 +1,13 @@
-package com.group1.shooz;
+package com.ccsd.product_management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ShoozApplication {
+public class ProductManagementApplication {
 
 	public static void main(String[] args) {
-		//bark
-
-		SpringApplication.run(ShoozApplication.class, args);
+		SpringApplication.run(ProductManagementApplication.class, args);
 	}
 
 }

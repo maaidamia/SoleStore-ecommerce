@@ -1,10 +1,10 @@
-package com.group1.shooz;
+package com.ccsd.product_management;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ShoozApplicationTests {
+class ProductManagementApplicationTests {
 
 	@Test
 	void contextLoads() {
