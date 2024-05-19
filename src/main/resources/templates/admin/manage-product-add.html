@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Add Product</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link th:href="@{/admin/css/styles.css}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
+<body class="sb-nav-fixed">
+<div th:insert="admin/top-nav :: topNav"></div>
+<div id="layoutSidenav">
+    <div th:insert="admin/side-nav :: sideNav"></div>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Add Product</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/admin/index}">Dashboard</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a th:href="@{/admin/manage-product}">Manage Product</a>
+                    </li>
+                    <li class="breadcrumb-item active">Add Product</li>
+                </ol>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Add New Product
+                    </div>
+                    <div class="card-body">
+<!--                        FORM to add product-->
+<!--                        enctype="multipart/form-data"-->
+                        <form action="#" th:action="@{/admin/manage-product-add}" th:object="${createProduct}" method="post" class="row g-3 needs-validation" novalidate>
+                            <div class="col-12">
+                                <label for="validationCustom0" class="form-label">Upload Image</label>
+                                <input th:field="*{productImage}" class="form-control" type="file" id="validationCustom0">
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="validationCustom01" class="form-label">Product name</label>
+                                <input type="text" th:field="*{productName.productName}" class="form-control" id="validationCustom01" value="Adidas Air Force 1" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="validationCustom02" class="form-label">Brand Name</label>
+                                <select th:field="*{brand}" class="form-select" id="validationCustom02" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option th:each="b : ${brandsObj}" th:value="${brandValue}" th:text="${b.brandName}"></option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please select a valid state.
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="validationCustom03" class="form-label">Price</label>
+                                <input type="text" th:field="*{productPrice}" class="form-control" id="validationCustom03" value="100.00" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="validationCustom04" class="form-label">Description</label>
+                                <textarea th:field="*{productDesc}"  class="form-control" id="validationCustom04" rows="3"></textarea>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+<!--                            <div class="form-group">-->
+<!--                                <label>Sizes and Quantities</label>-->
+<!--                                <div th:each="size, iterStat : ${allSizes}">-->
+<!--                                    <div class="form-row align-items-center">-->
+<!--                                        <div class="col-auto">-->
+<!--                                            <label th:for="|size-${iterStat.index}|" th:text="${size.size}"></label>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-auto">-->
+<!--                                            <input type="hidden" th:field="*{productQuantities[iterStat.index].size}" th:value="${size}">-->
+<!--                                            <input type="number" th:field="*{productQuantities[iterStat.index].quantity}" class="form-control" min="0" required>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+                            <div class="col-md-6">
+                                <label for="validationCustom05" class="form-label">Size</label>
+                                <select th:field="*{size}" class="form-select" id="validationCustom05" required>
+                                    <option selected disabled value="">Choose...</option>
+                                    <option th:each="s:${productsizeObj}" th:value="${sizeValue}" th:text="${s.productSize}"></option>
+                                </select>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom06" class="form-label">Quantity</label>
+                                <input type="text" th:field="*{productQuantity}" class="form-control" id="validationCustom06" value="100.00" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary" type="submit">Add New Product</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                    <div class="text-muted">Copyright &copy; CCSD Group 1</div>
+                    <div>
+                        <a href="#">Privacy Policy</a>
+                        &middot;
+                        <a href="#">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/admin/js/scripts.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+<script th:src="@{/admin/js/datatables-simple-demo.js}"></script>
+</body>
+</html>
