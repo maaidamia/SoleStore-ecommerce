@@ -20,8 +20,6 @@ public class AdminController {
     @Autowired
     private BrandService brandService;
     @Autowired
-    private ProductSizeService productSizeService;
-    @Autowired
     private UserService userService;
     @Autowired
     private OrderService orderService;
@@ -55,8 +53,6 @@ public class AdminController {
 
         //show list of brands
         model.addAttribute("brandsObj", brandService.getAllBrand());
-        //show list of size
-        model.addAttribute("productsizeObj", productSizeService.getAllSize());
         return "admin/manage-product-add";
     }
 

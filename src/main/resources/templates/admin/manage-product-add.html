@@ -40,73 +40,29 @@
                             <div class="col-12">
                                 <label for="validationCustom0" class="form-label">Upload Image</label>
                                 <input th:field="*{productImage}" class="form-control" type="file" id="validationCustom0">
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Product name</label>
-                                <input type="text" th:field="*{productName.productName}" class="form-control" id="validationCustom01" value="Adidas Air Force 1" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
+                                <input type="text" th:field="*{productName.productName}" class="form-control" id="validationCustom01" value="" required>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">Brand Name</label>
-                                <select th:field="*{brand}" class="form-select" id="validationCustom02" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option th:each="b : ${brandsObj}" th:value="${brandValue}" th:text="${b.brandName}"></option>
+                                <select th:field="*{brand.brandId}" class="form-select" id="validationCustom02" required>
+<!--                                    <option selected disabled value="">Choose...</option>-->
+                                    <option th:each="b : ${brandsObj}" th:value="${b.brandId}" th:text="${b.brandName}"></option>
                                 </select>
-                                <div class="invalid-feedback">
-                                    Please select a valid state.
-                                </div>
                             </div>
                             <div class="col-md-4">
                                 <label for="validationCustom03" class="form-label">Price</label>
                                 <input type="text" th:field="*{productPrice}" class="form-control" id="validationCustom03" value="100.00" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
                             </div>
                             <div class="col-12">
                                 <label for="validationCustom04" class="form-label">Description</label>
                                 <textarea th:field="*{productDesc}"  class="form-control" id="validationCustom04" rows="3"></textarea>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
                             </div>
-<!--                            <div class="form-group">-->
-<!--                                <label>Sizes and Quantities</label>-->
-<!--                                <div th:each="size, iterStat : ${allSizes}">-->
-<!--                                    <div class="form-row align-items-center">-->
-<!--                                        <div class="col-auto">-->
-<!--                                            <label th:for="|size-${iterStat.index}|" th:text="${size.size}"></label>-->
-<!--                                        </div>-->
-<!--                                        <div class="col-auto">-->
-<!--                                            <input type="hidden" th:field="*{productQuantities[iterStat.index].size}" th:value="${size}">-->
-<!--                                            <input type="number" th:field="*{productQuantities[iterStat.index].quantity}" class="form-control" min="0" required>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-                            <div class="col-md-6">
-                                <label for="validationCustom05" class="form-label">Size</label>
-                                <select th:field="*{size}" class="form-select" id="validationCustom05" required>
-                                    <option selected disabled value="">Choose...</option>
-                                    <option th:each="s:${productsizeObj}" th:value="${sizeValue}" th:text="${s.productSize}"></option>
-                                </select>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="validationCustom06" class="form-label">Quantity</label>
-                                <input type="text" th:field="*{productQuantity}" class="form-control" id="validationCustom06" value="100.00" required>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
+                            <input type="hidden" th:field="*{productQuantity}" class="form-control" id="validationCustom08" value="1" required>
+                            <input type="hidden" th:field="*{admin}" class="form-control" id="validationCustom05" value="1" required>
+                            <input type="hidden" th:field="*{size}" class="form-control" id="validationCustom06" value="1" required>
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Add New Product</button>
                             </div>
