@@ -67,7 +67,8 @@
                             <input type="hidden" th:field="*{admin}" class="form-control" id="validationCustom05" value="1" required>
                             <input type="hidden" th:field="*{size}" class="form-control" id="validationCustom06" value="1" required>
                             <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Update Product</button>
+                                <button class="btn btn-dark" type="submit">Update</button>
+                                <a th:href="@{/admin/product-delete/{id}(id=${product.productId})}" class="btn btn-light">Delete</a>
                             </div>
                         </form>
                     </div>

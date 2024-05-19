@@ -75,6 +75,14 @@ public class AdminController {
         return "admin/manage-product-update";
     }
 
+    //DELETE
+    @GetMapping("/product-delete/{id}")
+    public String deleteProduct(@PathVariable(value="id") long id){
+        //call delete product method
+        this.productService.deleteProductById(id);
+        return "redirect:/admin/manage-product";
+    }
+
     @GetMapping("/manage-order")
     public String manageOrder(Model model){
         model.addAttribute("listOrder", orderService.getAllOrder());

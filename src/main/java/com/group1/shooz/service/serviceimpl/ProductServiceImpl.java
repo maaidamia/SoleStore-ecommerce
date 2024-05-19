@@ -54,4 +54,9 @@ public class ProductServiceImpl implements ProductService {
         }
         return manageProduct;
     }
+
+    @Override
+    public void deleteProductById(long id) {
+        this.productRepository.deleteById(id);
+    }
 }
