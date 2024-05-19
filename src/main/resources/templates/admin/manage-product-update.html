@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Add Product</title>
+    <title>Update Product</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link th:href="@{/admin/css/styles.css}" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -18,7 +18,7 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Add Product</h1>
+                <h1 class="mt-4">Product Details</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">
                         <a th:href="@{/admin/index}">Dashboard</a>
@@ -26,17 +26,21 @@
                     <li class="breadcrumb-item">
                         <a th:href="@{/admin/manage-product}">Manage Product</a>
                     </li>
-                    <li class="breadcrumb-item active">Add Product</li>
+                    <li class="breadcrumb-item active">Product Details</li>
                 </ol>
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-table me-1"></i>
-                        Add New Product
+                        Update Product
                     </div>
                     <div class="card-body">
-<!--                        FORM to add product-->
-<!--                        enctype="multipart/form-data"-->
-                        <form action="#" th:action="@{/admin/product-save}" th:object="${createProduct}" method="post" class="row g-3 needs-validation" novalidate>
+                        <!--                        FORM to add product-->
+                        <!--                        enctype="multipart/form-data"-->
+                        <form action="#" th:action="@{/admin/product-save}" th:object="${product}" method="post" class="row g-3 needs-validation" novalidate>
+                            <input type="hidden" th:field="*{productId}">
+                            <div class="col-12">
+                                <img th:src="@{${product.productImage}}" alt="Product Image"  style="width: 300px; height: auto;">
+                            </div>
                             <div class="col-12">
                                 <label for="validationCustom0" class="form-label">Upload Image</label>
                                 <input th:field="*{productImage}" class="form-control" type="file" id="validationCustom0">
@@ -48,7 +52,6 @@
                             <div class="col-md-4">
                                 <label for="validationCustom02" class="form-label">Brand Name</label>
                                 <select th:field="*{brand.brandId}" class="form-select" id="validationCustom02" required>
-<!--                                    <option selected disabled value="">Choose...</option>-->
                                     <option th:each="b : ${brandsObj}" th:value="${b.brandId}" th:text="${b.brandName}"></option>
                                 </select>
                             </div>
@@ -64,7 +67,7 @@
                             <input type="hidden" th:field="*{admin}" class="form-control" id="validationCustom05" value="1" required>
                             <input type="hidden" th:field="*{size}" class="form-control" id="validationCustom06" value="1" required>
                             <div class="col-12">
-                                <button class="btn btn-dark" type="submit">Add New Product</button>
+                                <button class="btn btn-primary" type="submit">Update Product</button>
                             </div>
                         </form>
                     </div>

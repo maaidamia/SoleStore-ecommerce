@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <h4></h4>
-                            <a th:href="@{/admin/manage-product-form}" class="btn btn-dark btn-icon-split">Add New</a>
+                            <a th:href="@{/admin/product-addform}" class="btn btn-dark btn-icon-split">Add New</a>
                         </div>
                         <table id="datatablesSimple">
                             <thead>
@@ -69,7 +69,7 @@
 <!--                                <td th:text="${product.productQuantity}"></td>-->
 <!--                                <td th:text="${product.productDesc}"></td>-->
 <!--                                next page have CRUD operation for that selected product-->
-                                <td><a href="#" class="btn btn-dark btn-icon-split">View Details</a></td>
+                                <td><a th:href="@{/admin/product-updateform/{id}(id=${product.productId})}" class="btn btn-dark btn-icon-split">View Details</a></td>
                             </tr>
                             </tbody>
                         </table>

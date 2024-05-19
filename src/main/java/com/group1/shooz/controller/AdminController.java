@@ -5,10 +5,7 @@ import com.group1.shooz.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin")
@@ -45,8 +42,8 @@ public class AdminController {
 
 //    CREATE
     //method to show the form
-    @GetMapping("/manage-product-form")
-    public String createProduct(Model model){
+    @GetMapping("/product-addform")
+    public String viewAddProduct(Model model){
         //create model attribute attribute to bind form data
         ManageProduct product = new ManageProduct();
         model.addAttribute("createProduct", product);
@@ -57,11 +54,25 @@ public class AdminController {
     }
 
     //method to handle the form submission
-    @PostMapping("/manage-product-add")
+    @PostMapping("/product-save")
     public String saveProduct(@ModelAttribute("product") ManageProduct product){
         //save product to database
         productService.saveProduct(product);
         return "redirect:/admin/manage-product";
+    }
+
+    //UPDATE
+    @GetMapping("/product-updateform/{id}")
+    public String viewUpdateProduct(@PathVariable (value="id") long id, Model model){
+        //get product from the service
+        ManageProduct product = productService.getProductById(id);
+
+        //set product as a model attribute to pre-populate the form
+        model.addAttribute("product", product);
+
+        //show list of brands
+        model.addAttribute("brandsObj", brandService.getAllBrand());
+        return "admin/manage-product-update";
     }
 
     @GetMapping("/manage-order")

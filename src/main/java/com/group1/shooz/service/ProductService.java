@@ -10,4 +10,7 @@ public interface ProductService {
     void createProduct(ManageProduct product);
     ManageProduct saveProduct(ManageProduct product);
 
+    ManageProduct getProductById(long id);
+
+
 }

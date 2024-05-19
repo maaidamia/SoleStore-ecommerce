@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -39,5 +40,18 @@ public class ProductServiceImpl implements ProductService {
         // Now save the ManageProduct entity
         return productRepository.save(product);
 //        this.productRepository.save(product);
+    }
+
+    //find product
+    @Override
+    public ManageProduct getProductById(long id) {
+        Optional<ManageProduct> optional = productRepository.findById(id);
+        ManageProduct manageProduct = null;
+        if(optional.isPresent()) {
+            manageProduct = optional.get();
+        }else{
+            throw new RuntimeException("Product Not Found for ID: " +id);
+        }
+        return manageProduct;
     }
 }
