@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .small-quantity-input {
+            width: 50px; /* Adjust the width as needed */
+            text-align: center; /* Center align the text */
+        }
+
+        .item-stay{
+            padding-left:10;
+        }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col"><h4><b>Shopping Cart</b></h4></div>
+                    <div class="col align-self-center text-right text-muted" th:text="${#lists.size(orderItems)} + ' items'"></div>
+                </div>
+            </div>
+            <div th:each="item, iterStat : ${orderItems}">
+                <div class="row border-top border-bottom" th:data-item-id="${item.orders_item_id}">
+                    <div class="row main align-items-center">
+                        <div class="col-2 text-center"><img class="img-fluid" th:src="@{'' + ${item.product.product_image}}"></div>
+                        <div class="col">
+                            <div class="row text-muted" th:text="${item.product.product_name.product_name}"></div>
+                        </div>
+                        <div class="col">
+                            <a href="#" class="decrement">-</a><input type="text" class="quantity border small-quantity-input" th:value="${item.order_items_productquantity}" th:max="${item.order_items_productquantity}" /><a href="#" class="increment">+</a>
+                        </div>
+                        <div class="col-2 product-price" th:data-index="${iterStat.index}" th:data-price-per-unit="${item.product.product_price}" th:text="'€ ' + ${item.product.product_price}"></div>
+                        <div class="col-1">
+                            <span class="delete-item" th:data-item-id="${item.orders_item_id}"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="back-to-shop"><a href="/">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div><h5><b>Summary</b></h5></div>
+            <hr>
+            <div class="row">
+                <div class="col item-stay">ITEMS <span th:text="${#lists.size(orderItems)}"></span></div>
+            </div>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right">€ <span id="total-price">0</span></div>
+            </div>
+            <button class="btn" id="checkout-button">CHECKOUT</button>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(document).ready(function() {
+
+    // Calculate total price on page load
+    calculateTotalPrice();
+
+    // Calculate total price whenever quantity changes
+    $('.quantity').change(function() {
+        var input = $(this);
+        var newValue = parseInt(input.val());
+        var maxStock = parseInt(input.attr('max'));
+
+        // Check if the new value exceeds the available stock
+        if(newValue > maxStock) {
+            alert('Not enough stock!');
+            input.val(maxStock);
+        }
+
+        updateProductPrice(input);
+        calculateTotalPrice();
+    });
+
+    // Increment quantity
+    $('.increment').click(function(e) {
+        e.preventDefault();
+        var input = $(this).siblings('.quantity');
+        var newValue = parseInt(input.val()) + 1;
+        input.val(newValue).change();
+    });
+
+    // Decrement quantity
+    $('.decrement').click(function(e) {
+        e.preventDefault();
+        var input = $(this).siblings('.quantity');
+        var newValue = parseInt(input.val()) - 1;
+        if (newValue >= 0) {
+            input.val(newValue).change();
+        }
+    });
+
+    function updateProductPrice(input) {
+        var quantity = parseInt(input.val());
+        var pricePerUnit = parseFloat(input.closest('.main').find('.product-price').attr('data-price-per-unit'));
+        var newPrice = quantity * pricePerUnit;
+        input.closest('.main').find('.product-price').text('€ ' + newPrice.toFixed(2));
+    }
+
+    function calculateTotalPrice() {
+        var totalPrice = 0;
+        $('.main').each(function() {
+            var quantity = parseInt($(this).find('.quantity').val());
+            var pricePerUnit = parseFloat($(this).find('.product-price').attr('data-price-per-unit'));
+            var itemPrice = quantity * pricePerUnit;
+            totalPrice += itemPrice;
+        });
+        $('#total-price').text(totalPrice.toFixed(2));
+    }
+
+        // Redirect to checkout page on button click
+        $('#checkout-button').click(function() {
+            window.location.href = '/checkout';
+        });
+
+        // Handle delete item
+        $('.delete-item').click(function() {
+            var $this = $(this);
+            var itemId = $this.attr('data-item-id');
+
+            if (confirm('Are you sure you want to delete this item?')) {
+                $.ajax({
+                    url: '/cart/delete',
+                    type: 'POST',
+                    data: { id: itemId },
+                    success: function(response) {
+                        // On success, remove the item from the DOM
+                        $this.closest('.row.border-top.border-bottom').remove();
+                        alert('Item deleted successfully.');
+                    },
+                    error: function(error) {
+                        // Handle the error case
+                        alert('An error occurred while deleting the item. Please try again.');
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>
