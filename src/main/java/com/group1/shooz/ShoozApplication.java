@@ -9,7 +9,7 @@ public class ShoozApplication {
 
 
 	public static void main(String[] args) {
-		SpringApplication.run(ShoozApplication.class, args); //l
+		SpringApplication.run(ShoozApplication.class, args);
 	}
 
 }
