@@ -9,10 +9,6 @@ public class ShoozApplication {
 
 
 	public static void main(String[] args) {
-		//bark
-
-		//hello
-
 		SpringApplication.run(ShoozApplication.class, args);
 	}
 
